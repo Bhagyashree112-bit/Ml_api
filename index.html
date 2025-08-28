@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Track Your Beat</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #a18cd1, #fbc2eb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    .illustration {
+      width: 100%;
+      max-width: 200px;
+      margin: 0 auto 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+    }
+
+    h1 {
+      color: #d63384;
+      margin-bottom: 5px;
+      font-size: 26px;
+    }
+
+    h2 {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 20px;
+      font-weight: normal;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e63950;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Replace the src below with your actual image path or URL -->
+    <img src="glowing-heart.jpg" alt="Hands holding glowing heart" class="illustration">
+    <h1>Track Your Beat</h1>
+    <h2>Predict Your Heart</h2>
+    <form id="predict-form">
+      <label for="age">Age:</label>
+      <input type="number" id="age" required>
+
+      <label for="sex">Sex (0 = Female, 1 = Male):</label>
+      <input type="number" id="sex" required>
+
+      <label for="bp">Blood Pressure:</label>
+      <input type="number" id="bp" required>
+
+      <label for="cholesterol">Cholesterol:</label>
+      <input type="number" id="cholesterol" required>
+
+      <button type="submit">Predict</button>
+    </form>
+    <div id="result">Prediction: —</div>
+    <div class="footer">Your heart deserves care. 💗</div>
+  </div>
+
+  <script>
+    document.getElementById("predict-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const data = {
+        age: parseInt(document.getElementById("age").value),
+        sex: parseInt(document.getElementById("sex").value),
+        bp: parseInt(document.getElementById("bp").value),
+        cholesterol: parseInt(document.getElementById("cholesterol").value)
+      };
+
+      fetch("https://your-api-url.com/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        document.getElementById("result").innerText = "Prediction: " + result.prediction;
+      })
+      .catch(error => {
+        document.getElementById("result").innerText = "Error: " + error;
+      });
+    });
+  </script>
+</body>
+</html>

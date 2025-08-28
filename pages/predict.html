@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Predict</title>
+</head>
+<body>
+    <h2>❤️ Heart Disease Prediction</h2>
+    <form method="POST">
+        <label>Age:</label>
+        <input type="number" name="age" required><br><br>
+
+        <label>Sex:</label>
+        <select name="sex">
+            <option>Male</option>
+            <option>Female</option>
+        </select><br><br>
+
+        <label>Chest Pain Type (0-3):</label>
+        <input type="number" name="cp" min="0" max="3" required><br><br>
+
+        <label>Resting Blood Pressure:</label>
+        <input type="number" name="trestbps" required><br><br>
+
+        <label>Cholesterol:</label>
+        <input type="number" name="chol" required><br><br>
+
+        <label>Max Heart Rate:</label>
+        <input type="number" name="thalach" required><br><br>
+
+        <label>Exercise Induced Angina (0=No, 1=Yes):</label>
+        <select name="exang">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Result: {{ prediction }}</h3>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>

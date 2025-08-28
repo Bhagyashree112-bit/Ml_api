@@ -1,4 +1,6 @@
-fastapi
-uvicorn
+
+flask
 numpy
+joblib
 scikit-learn
+gunicorn
